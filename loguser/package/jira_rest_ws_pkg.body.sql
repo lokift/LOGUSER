@@ -11,7 +11,7 @@
     -- Test statements here
     l_clob := apex_web_service.make_rest_request( --p_url         => 'https://gost-jira.atlassian.net/rest/api/2/search?jql=assignee=alexey.sluchko',
                                                  p_url         => in_jira_base_url || '/issue/' ||
-                                                                  nvl(in_jira_issue_id, in_jira_issue_key),
+                                                                  nvl(to_char(in_jira_issue_id), in_jira_issue_key),
                                                  p_http_method => 'GET',
                                                  p_wallet_path => 'file:/u01/app/oracle/wallet',
                                                  p_wallet_pwd  => 'WalletPasswd123',
