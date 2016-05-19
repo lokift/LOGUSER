@@ -10,7 +10,8 @@
   BEGIN
     -- Test statements here
     l_clob := apex_web_service.make_rest_request( --p_url         => 'https://gost-jira.atlassian.net/rest/api/2/search?jql=assignee=alexey.sluchko',
-                                                 p_url         => 'https://gost-jira.atlassian.net/rest/api/2/issue/UFAP-486',
+                                                 p_url         => 'https://gost-jira.atlassian.net/rest/api/2/issue/' ||
+                                                                  nvl(in_jira_issue_id, in_jira_issue_key),
                                                  p_http_method => 'GET',
                                                  p_wallet_path => 'file:/u01/app/oracle/wallet',
                                                  p_wallet_pwd  => 'WalletPasswd123',
@@ -19,10 +20,10 @@
   
     apex_json.parse(p_values => l_values, p_source => l_clob);
   
-    t_jira_issue.id        := apex_json.get_varchar2(p_values => l_values, p_path => 'id');
-    t_jira_issue.url_json  := apex_json.get_varchar2(p_values => l_values, p_path => 'self');
-    t_jira_issue.key       := apex_json.get_varchar2(p_values => l_values, p_path => 'key');
-    t_jira_issue.timespent := apex_json.get_number(p_values => l_values, p_path => 'fields.timespent');
+    l_jira_issue.id        := apex_json.get_varchar2(p_values => l_values, p_path => 'id');
+    l_jira_issue.url_json  := apex_json.get_varchar2(p_values => l_values, p_path => 'self');
+    l_jira_issue.key       := apex_json.get_varchar2(p_values => l_values, p_path => 'key');
+    l_jira_issue.timespent := apex_json.get_number(p_values => l_values, p_path => 'fields.timespent');
   
     RETURN l_jira_issue;
   
