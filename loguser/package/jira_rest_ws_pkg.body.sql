@@ -20,10 +20,10 @@
   
     apex_json.parse(p_values => l_values, p_source => l_clob);
   
-    l_jira_issue.id        := apex_json.get_varchar2(p_values => l_values, p_path => 'id');
-    l_jira_issue.url_json  := apex_json.get_varchar2(p_values => l_values, p_path => 'self');
-    l_jira_issue.key       := apex_json.get_varchar2(p_values => l_values, p_path => 'key');
-    l_jira_issue.timespent := apex_json.get_number(p_values => l_values, p_path => 'fields.timespent');
+    l_jira_issue(id        => apex_json.get_varchar2(p_values => l_values, p_path => 'id'),
+                 url_json  => apex_json.get_varchar2(p_values => l_values, p_path => 'self'),
+                 key       => apex_json.get_varchar2(p_values => l_values, p_path => 'key'),
+                 timespent => apex_json.get_number(p_values => l_values, p_path => 'fields.timespent'));
   
     RETURN l_jira_issue;
   
