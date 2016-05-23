@@ -13,10 +13,10 @@
                                                  p_url         => in_jira_base_url || '/issue/' ||
                                                                   nvl(to_char(in_jira_issue_id), in_jira_issue_key),
                                                  p_http_method => 'GET',
-                                                 p_wallet_path => 'file:/u01/app/oracle/wallet',
-                                                 p_wallet_pwd  => 'WalletPasswd123',
-                                                 p_username    => 'alexey.sluchko',
-                                                 p_password    => 'lokiftwww011187');
+                                                 p_wallet_path => get_env('wallet_location'),
+                                                 p_wallet_pwd  => get_env('wallet_password'),
+                                                 p_username    => get_env('jira_delault_user'),
+                                                 p_password    => get_env('jira_delault_password'));
   
     apex_json.parse(p_values => l_values, p_source => l_clob);
   
