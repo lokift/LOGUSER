@@ -5,8 +5,7 @@
   -- Created : 19.05.2016 13:08:16
   -- Purpose : 
 
-  FUNCTION get_issue(in_jira_base_url  IN VARCHAR2,
-                     in_jira_issue_id  IN NUMBER,
+  FUNCTION get_issue(in_jira_issue_id  IN NUMBER,
                      in_jira_issue_key IN VARCHAR2) RETURN t_jira_issue;
 
 END jira_rest_ws_pkg;
